@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src='./static/jquery.js'></script>
+    <script src='./static/require.js'></script>
+    <script>
+        // console.log('require',require.toString());
+        // mod1模块
+        console.log('模块1')
+        require(['static/mod1'],function(mod1){
+            mod1.say();
+        });
+
+        /**mod3模块
+         * 验证AMD规范是否为依赖前置。
+         * 结论：否
+         * AMD规范的实现是require.js;require.js中封装的require方法为异步处理模块，依赖项必须在回调中使用
+         * 模块按需加载，使用的时候才会加载；
+         */
+        setTimeout(function(){
+            var btn = document.getElementById('btn');
+            btn.onclick = function(){
+                console.log('模块3')
+                require(['static/mod3'],function(mod3){
+                    // mod3.say1();
+                    // mod3.say2();
+                });
+            }
+        },1000)
+    </script>
+</head>
+<body>
+    <p>AMD demo </p>
+    <p>
+        <button id='btn'>点我</button>
+    </p>
+    <img  width='200px' src="https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/02/00/ChMkJ1bKwzWIG1wyAAtgQmiHNKYAALGzgAlqhMAC2Ba721.jpg" alt="">
+    <img  width='200px' src="https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/01/0F/ChMkJlbKwzSIMiRBAAjYSEI64hwAALGzQKRQOsACNhg039.jpg" alt="">
+    <img  width='200px' src="https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/01/0F/ChMkJ1bKwzOIILbRAAsICtXG0ugAALGzQJ-gfwACwgi478.jpg" alt="">
+    <img  width='200px' src="https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/01/0E/ChMkJlbKwaOIZAwgAAiOBr8t3TwAALGbQOejjUACI4e063.jpg" alt="">
+    <img  width='200px' src="https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/01/0F/ChMkJlbKwyuIPNU7AA4449voDwsAALGywHJyUQADjj7572.jpg" alt="">
+</body>
+
+</html>
